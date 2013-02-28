@@ -98,14 +98,5 @@ namespace INS201.Structures.Tests
 
             s.Peek();
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void PopShouldThrowExceptionIfLenghtIsZero()
-        {
-            var s = new Stack<int>();
-
-            s.Pop();
-        }
     }
 }
