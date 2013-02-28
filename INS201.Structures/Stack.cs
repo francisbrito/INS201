@@ -31,6 +31,11 @@ namespace INS201.Structures
 
         public T Pop()
         {
+            if (_length == 0)
+            {
+                throw new InvalidOperationException();
+            }
+
             _length--;
             return _items.Pop();
         }
