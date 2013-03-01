@@ -132,5 +132,13 @@ namespace INS201.Structures
                 Replace(index, value);
             }
         }
+
+        public T[] Items
+        {
+            get
+            {
+                return _items;
+            }
+        }
     }
 }
