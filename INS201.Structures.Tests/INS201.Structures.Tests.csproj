@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\INS201.Structures\INS201.Structures.csproj">
-      <Project>{ac19880d-c6f0-4b8a-bade-c2f599502d67}</Project>
+      <Project>{60533a40-3513-4bfa-b97d-cee918656e1a}</Project>
       <Name>INS201.Structures</Name>
     </ProjectReference>
   </ItemGroup>
