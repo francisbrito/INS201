@@ -45,6 +45,7 @@
     <Compile Include="Deque.cs" />
     <Compile Include="Dictonary.cs" />
     <Compile Include="DynamicArray.cs" />
+    <Compile Include="KeyedNode.cs" />
     <Compile Include="LinkedList.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

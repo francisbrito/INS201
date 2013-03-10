@@ -22,15 +22,15 @@ namespace INS201.Structures.Tests
         {
             var l = new LinkedList<int>();
 
-            l.AddFirst(new Node<int>(1));
+            l.AddFirst(1);
 
             Assert.AreEqual(1, l.Length);
 
-            l.AddFirst(new Node<int>(2));
+            l.AddFirst(2);
 
             Assert.AreEqual(2, l.Length);
 
-            l.AddFirst(new Node<int>(3));
+            l.AddFirst(3);
 
             Assert.AreEqual(3, l.Length);
         }
@@ -40,15 +40,15 @@ namespace INS201.Structures.Tests
         {
             var l = new LinkedList<int>();
 
-            l.AddLast(new Node<int>(1));
+            l.AddLast(1);
 
             Assert.AreEqual(1, l.Length);
 
-            l.AddLast(new Node<int>(2));
+            l.AddLast(2);
 
             Assert.AreEqual(2, l.Length);
 
-            l.AddLast(new Node<int>(3));
+            l.AddLast(3);
 
             Assert.AreEqual(3, l.Length);
         }
@@ -58,9 +58,9 @@ namespace INS201.Structures.Tests
         {
             var l = new LinkedList<int>();
 
-            l.AddFirst(new Node<int>(1));
-            l.AddFirst(new Node<int>(2));
-            l.AddFirst(new Node<int>(3));
+            l.AddFirst(1);
+            l.AddFirst(2);
+            l.AddFirst(3);
 
             Assert.AreEqual(3, l.Length);
 
@@ -82,9 +82,9 @@ namespace INS201.Structures.Tests
         {
             var l = new LinkedList<int>();
 
-            l.AddLast(new Node<int>(1));
-            l.AddLast(new Node<int>(2));
-            l.AddLast(new Node<int>(3));
+            l.AddLast(1);
+            l.AddLast(2);
+            l.AddLast(3);
 
             Assert.AreEqual(3, l.Length);
 

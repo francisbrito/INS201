@@ -8,14 +8,12 @@ namespace INS201.Structures
     public class Node<T>
     {
         private T _value;
-        private Node<T> _next;
-        private Node<T> _previous;
 
         public Node(T value)
         {
             _value = value;
-            _next = null;
-            _previous = null;
+            Next = null;
+            Previous = null;
         }
 
         public T Value
@@ -26,20 +24,7 @@ namespace INS201.Structures
             }
         }
 
-        public Node<T> Next
-        {
-            get
-            {
-                return _next;
-            }
-        }
-
-        public Node<T> Previous
-        {
-            get
-            {
-                return _previous;
-            }
-        }
+        public Node<T> Next { get; set; }
+        public Node<T> Previous { get; set; }
     }
 }
