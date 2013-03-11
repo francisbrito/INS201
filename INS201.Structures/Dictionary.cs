@@ -5,7 +5,7 @@ using System.Text;
 
 namespace INS201.Structures
 {
-    public class Dictonary<TKey, TValue>
+    public class Dictionary<TKey, TValue>
     {
         public const int INITIAL_INNER_SIZE = 2;
         public const float IDEAL_LOAD_FACTOR = 1.0F;
@@ -15,7 +15,7 @@ namespace INS201.Structures
 
         private DynamicArray<LinkedList<TValue>> _items;
 
-        public Dictonary()
+        public Dictionary()
         {
             _length = 0;
 

@@ -12,7 +12,7 @@ namespace INS201.Hw.Forth
         static void Main(string[] args)
         {
             var number = 1000000;
-            var d = new Dictonary<string, int>();
+            var d = new Dictionary<string, int>();
 
             Console.WriteLine(d.Length);
             d.Insert("Hello", 1);
