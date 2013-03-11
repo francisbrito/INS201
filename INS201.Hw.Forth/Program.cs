@@ -11,26 +11,28 @@ namespace INS201.Hw.Forth
     {
         static void Main(string[] args)
         {
-            //var d = new Dictonary<string, int>();
+            var d = new Dictonary<string, int>();
 
-            //Console.WriteLine(d.Length);
-            //d.Insert("Hello", 1);
-            //d.Insert("World", 2);
-            //d.Remove("Hello");
-            //Console.WriteLine(d.Find("World"));
+            Console.WriteLine(d.Length);
+            d.Insert("Hello", 1);
+            d.Insert("World", 2);
+            d.Remove("Hello");
+            Console.WriteLine(d.Find("World"));
 
-            Dictionary<string, int> dd = new Dictionary<string, int>();
-
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 1; i <= 1000000; i++)
             {
-                dd.Add(string.Format("{0}", i), i);
+                var key = string.Format("{0}", i);
+
+                d.Insert(key, i);
             }
 
-            foreach (var item in dd)
-            {
-                Console.WriteLine("K: {0}\tH(K): {1}\tV: {2}\tH(V): {3}", item.Key, item.Key.GetHashCode(),
-                    item.Value, item.Value.GetHashCode());
-            }
+            Console.WriteLine(d.Find("1"));
+            Console.WriteLine(d.Find("256"));
+            Console.WriteLine(d.Find("1013"));
+            Console.WriteLine(d.Find("9999"));
+            Console.WriteLine(d.Find("199881"));
+            Console.WriteLine(d.Find("1000000"));
+
         }
     }
 }

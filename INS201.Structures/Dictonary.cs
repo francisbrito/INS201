@@ -7,25 +7,7 @@ namespace INS201.Structures
 {
     public class Dictonary<TKey, TValue>
     {
-
-        #region Prime Numbers
-        public static int[] PRIME_SET = new int[] {
-            31, 37, 41, 43, 47, 53, 59, 
-            61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 
-            137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 
-            211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 
-            283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 
-            379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 
-            461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 
-            563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 
-            643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 
-            739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 
-            829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 
-            937, 941, 947, 953, 967, 971, 977, 983, 991, 997
-        };
-        #endregion
-
-        private int _currentPrimePivot = 0;
+        public const int INITIAL_INNER_SIZE = 4;
 
         private int _length;
 
@@ -34,7 +16,17 @@ namespace INS201.Structures
         public Dictonary()
         {
             _length = 0;
+            InitializeItems();
+        }
+
+        private void InitializeItems()
+        {
             _items = new DynamicArray<LinkedList<TValue>>();
+
+            for (int i = 0; i < INITIAL_INNER_SIZE; i++)
+            {
+                _items.Add(new LinkedList<TValue>());
+            }
         }
 
         public int Length
@@ -47,11 +39,19 @@ namespace INS201.Structures
 
         private int Hash(TKey key)
         {
-            int preHash = key.GetHashCode(); // Relaying of .NET's Object#GetHashCode method to resolve hash of ANY type.
+            // Relaying of .NET's Object#GetHashCode method to resolve hash of ANY type.
+            // NOTE: The hash may be negative so, we get its absolute value.
+            int preHash = Math.Abs(key.GetHashCode());
 
-            preHash = (preHash * PRIME_SET[_currentPrimePivot]) % _length;
+            preHash = (preHash * GetSalt()) % _items.Length;
 
             return preHash;
+        }
+
+        private int GetSalt()
+        {
+            // NOTE: This should return a prime number.
+            return 1;
         }
 
         public void Insert(TKey key, TValue value)
@@ -146,6 +146,7 @@ namespace INS201.Structures
                         result = curr.Value;
                         break;
                     }
+
                     curr = curr.Next as KeyedNode<TKey, TValue>;    
                 }
             }
