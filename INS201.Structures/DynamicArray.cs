@@ -14,9 +14,14 @@ namespace INS201.Structures
         private int _length;
         private T[] _items;
 
-        public DynamicArray()
+        public DynamicArray() : this(GROWTH_CONSTANT) 
         {
-            _items = new T[GROWTH_CONSTANT]; //So it grows on-pair with GROWTH_CONSTANT.
+            //So it grows on-pair with GROWTH_CONSTANT.
+        } 
+
+        public DynamicArray(int capacity)
+        {
+            _items = new T[capacity];
         }
 
         public void Add(T newItem)
@@ -75,7 +80,7 @@ namespace INS201.Structures
                 // "default-izes" item. 
                 // If its a reference type (i.e: object) sets it to null, 
                 // if its a value type sets it to its default value.
-                _items[_length - 1] = default(T); 
+                _items[_length - 1] = default(T);
             }
 
             _length--;
