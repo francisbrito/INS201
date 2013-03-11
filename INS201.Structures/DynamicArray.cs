@@ -45,7 +45,7 @@ namespace INS201.Structures
 
         public T At(int index)
         {
-            if (index < 0 || index > _length)
+            if (index < 0 || (index > _length && index > Capacity))
             {
                 throw new IndexOutOfRangeException();
             }
@@ -117,7 +117,7 @@ namespace INS201.Structures
 
         public void Replace(int index, T newValue)
         {
-            if (index < 0 || index > _length)
+            if (index < 0 || (index > _length && index > Capacity))
             {
                 throw new InvalidOperationException();
             }
@@ -143,6 +143,14 @@ namespace INS201.Structures
             get
             {
                 return _items;
+            }
+        }
+
+        public int Capacity
+        {
+            get
+            {
+                return _items.Length;
             }
         }
     }

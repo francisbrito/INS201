@@ -141,6 +141,33 @@ namespace INS201.Structures
             _length--;
         }
 
+        public void RemoveNode(Node<T> node)
+        {
+            // NOTE:
+            // This method should only be called if the node is inside the list.
+            // This should be accounted for in the future.
+
+            // If its a head, i.e: Has no previous.
+            if (node.Previous == null)
+            {
+                node.Next.Previous = null;
+            }
+            // If its a tail, i.e: Has no next.
+            else if (node.Next == null)
+            {
+                node.Previous.Next = null;
+            }
+            else
+            {
+                node.Previous.Next = node.Next;
+                node.Next.Previous = node.Previous;
+            }
+
+            node = null;
+
+            _length--;
+        }
+
         private void Swap(Node<T> firstNode, Node<T> secondNode)
         {
             if (firstNode == null || secondNode == null)
