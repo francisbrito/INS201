@@ -11,6 +11,7 @@ namespace INS201.Hw.Forth
     {
         static void Main(string[] args)
         {
+            var number = 1000000;
             var d = new Dictonary<string, int>();
 
             Console.WriteLine(d.Length);
@@ -19,20 +20,31 @@ namespace INS201.Hw.Forth
             d.Remove("Hello");
             Console.WriteLine(d.Find("World"));
 
-            for (int i = 1; i <= 1000000; i++)
+            for (int i = 1; i <= number; i++)
             {
                 var key = string.Format("{0}", i);
 
                 d.Insert(key, i);
             }
 
-            Console.WriteLine(d.Find("1"));
-            Console.WriteLine(d.Find("256"));
-            Console.WriteLine(d.Find("1013"));
-            Console.WriteLine(d.Find("9999"));
-            Console.WriteLine(d.Find("199881"));
-            Console.WriteLine(d.Find("1000000"));
+            // d.Remove("1");
 
+            Console.WriteLine(d.Find("1"));
+            Console.WriteLine(d.Find("2"));
+            Console.WriteLine(d.Find("4"));
+            Console.WriteLine(d.Find("8"));
+            Console.WriteLine(d.Find("999999"));
+
+            //var dd = new Dictionary<string, int>();
+
+            //for (int i = 1; i <= number; i++)
+            //{
+            //    var key = string.Format("{0}", i);
+
+            //    dd.Add(key, i);
+            //}
+
+            //Console.WriteLine(dd["999999"]);
         }
     }
 }

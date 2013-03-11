@@ -7,7 +7,9 @@ namespace INS201.Structures
 {
     public class Dictonary<TKey, TValue>
     {
-        public const int INITIAL_INNER_SIZE = 4;
+        public const int INITIAL_INNER_SIZE = 2;
+        public const float IDEAL_LOAD_FACTOR = 1.0F;
+        public const int GROWTH_CONSTANT = 2;
 
         private int _length;
 
@@ -16,17 +18,13 @@ namespace INS201.Structures
         public Dictonary()
         {
             _length = 0;
+
             InitializeItems();
         }
 
         private void InitializeItems()
         {
-            _items = new DynamicArray<LinkedList<TValue>>();
-
-            for (int i = 0; i < INITIAL_INNER_SIZE; i++)
-            {
-                _items.Add(new LinkedList<TValue>());
-            }
+            _items = new DynamicArray<LinkedList<TValue>>(INITIAL_INNER_SIZE);
         }
 
         public int Length
@@ -37,15 +35,23 @@ namespace INS201.Structures
             }
         }
 
-        private int Hash(TKey key)
+        private int Hash(TKey key, int size)
         {
             // Relaying of .NET's Object#GetHashCode method to resolve hash of ANY type.
             // NOTE: The hash may be negative so, we get its absolute value.
             int preHash = Math.Abs(key.GetHashCode());
 
-            preHash = (preHash * GetSalt()) % _items.Length;
+            // Hash function depends in the capacity of the dictionary
+            // making it hardly useful outside of its context...
+            preHash = (preHash * GetSalt()) % size;
 
             return preHash;
+        }
+
+        private int Hash(TKey key)
+        {
+            // This work-around 'softens' coupling a little.
+            return Hash(key, _items.Capacity);
         }
 
         private int GetSalt()
@@ -56,6 +62,14 @@ namespace INS201.Structures
 
         public void Insert(TKey key, TValue value)
         {
+            var currentLoad = GetLoadFactor();
+
+            // If current load is higher than expected load factor.
+            if (currentLoad > IDEAL_LOAD_FACTOR)
+            {
+                RehashItems();
+            }
+
             int hash = Hash(key);
 
             // If the list hasn't being created.
@@ -77,6 +91,41 @@ namespace INS201.Structures
 
             // NOTE:
             // Should check for LOAD FACTOR somewhere around here...
+        }
+
+        private void RehashItems()
+        {
+            var newCapacity = _items.Capacity * GROWTH_CONSTANT;
+            var oldList = _items;
+            
+            _length = 0; // Reset length.
+
+            _items = new DynamicArray<LinkedList<TValue>>(newCapacity);
+
+            for (int i = 0; i < oldList.Capacity; i++)
+            {
+                var currList = oldList[i];
+
+                // No need to work on empty lists.
+                if (currList == null)
+                {
+                    continue;
+                }
+
+                var curr = currList.Head as KeyedNode<TKey, TValue>;
+
+                while (curr != null)
+                {
+                    Insert(curr.Key, curr.Value);
+
+                    curr = curr.Next as KeyedNode<TKey, TValue>;
+                }
+            }
+        }
+
+        private float GetLoadFactor()
+        {
+            return (float) _length / _items.Capacity;
         }
 
         public void Remove(TKey key)
@@ -107,22 +156,31 @@ namespace INS201.Structures
 
             // _items[hash] = null;
 
-            var curr = _items[hash].Head as KeyedNode<TKey, TValue>;
+            var list = _items[hash];
+
+            var curr = list.Head as KeyedNode<TKey, TValue>;
 
             while (curr != null)
             {
                 if (curr.Key.Equals(key))
                 {
-                    curr = null;
+                    // NOTE: This DOES NOT remove the element from list.
+                    // curr = null;
+                    list.RemoveNode(curr);
                     break;
                 }
 
                 curr = curr.Next as KeyedNode<TKey, TValue>;
             }
+
+            _length--;
         }
 
         public TValue Find(TKey key)
         {
+            // Theres an Issue with this return value,
+            // since any non-null value is actually a good value.
+            // Consider throwing an exception instead.
             TValue result = default(TValue);
 
             // First, find the 'Spot' where this key belongs,
@@ -144,10 +202,11 @@ namespace INS201.Structures
                     if (curr.Key.Equals(key))
                     {
                         result = curr.Value;
+                        // TODO: Move element to front.
                         break;
                     }
 
-                    curr = curr.Next as KeyedNode<TKey, TValue>;    
+                    curr = curr.Next as KeyedNode<TKey, TValue>;
                 }
             }
 
