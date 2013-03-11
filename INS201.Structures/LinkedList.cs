@@ -141,15 +141,17 @@ namespace INS201.Structures
             _length--;
         }
 
-        public void Swap(Node<T> firstNode, Node<T> secondNode)
+        private void Swap(Node<T> firstNode, Node<T> secondNode)
         {
-            var temp = firstNode;
+            if (firstNode == null || secondNode == null)
+            {
+                throw new ArgumentNullException("At least one of your nodes is null.");
+            }
 
-            firstNode.Next = secondNode.Next;
-            firstNode.Previous = secondNode.Previous;
+            var tempValue = firstNode.Value;
 
-            secondNode.Next = temp.Next;
-            secondNode.Previous = temp.Previous;
+            firstNode.Value = secondNode.Value;
+            secondNode.Value = tempValue;
         }
 
         public void SwapHead(Node<T> node)

@@ -7,23 +7,14 @@ namespace INS201.Structures
 {
     public class Node<T>
     {
-        private T _value;
-
         public Node(T value)
         {
-            _value = value;
+            Value = value;
             Next = null;
             Previous = null;
         }
 
-        public T Value
-        {
-            get
-            {
-                return _value;
-            }
-        }
-
+        public T Value { get; set; }
         public Node<T> Next { get; set; }
         public Node<T> Previous { get; set; }
     }
