@@ -118,5 +118,25 @@ namespace INS201.Structures.Tests
 
             l.RemoveLast();
         }
+
+        [TestMethod]
+        public void AddFirstChangesHeadToNewNode()
+        {
+            var l = new LinkedList<int>();
+
+            Assert.IsNull(l.Head);
+
+            l.AddFirst(1);
+
+            Assert.AreEqual(1, l.Head.Value);
+
+            l.AddFirst(2);
+
+            Assert.AreEqual(2, l.Head.Value);
+
+            l.AddFirst(3);
+
+            Assert.AreEqual(3, l.Head.Value);
+        }
     }
 }

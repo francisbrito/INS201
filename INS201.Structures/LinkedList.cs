@@ -132,10 +132,12 @@ namespace INS201.Structures
             {
                 _tail = _head = null;
             }
+            else
             {
                 _tail.Previous.Next = null;
                 _tail = _tail.Previous;
             }
+
             _length--;
         }
 

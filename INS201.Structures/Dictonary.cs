@@ -106,6 +106,19 @@ namespace INS201.Structures
             // Walk it and find the item to be deleted.
 
             // _items[hash] = null;
+
+            var curr = _items[hash].Head as KeyedNode<TKey, TValue>;
+
+            while (curr != null)
+            {
+                if (curr.Key.Equals(key))
+                {
+                    curr = null;
+                    break;
+                }
+
+                curr = curr.Next as KeyedNode<TKey, TValue>;
+            }
         }
 
         public TValue Find(TKey key)
@@ -123,11 +136,17 @@ namespace INS201.Structures
             // If there's a list associated to key, walk it.
             if (list != null)
             {
-                var curr = list.Head;
+                var curr = list.Head as KeyedNode<TKey, TValue>;
 
                 while (curr != null)
                 {
-                    curr = curr.Next;    
+                    // If an element happens to match given key.
+                    if (curr.Key.Equals(key))
+                    {
+                        result = curr.Value;
+                        break;
+                    }
+                    curr = curr.Next as KeyedNode<TKey, TValue>;    
                 }
             }
 
