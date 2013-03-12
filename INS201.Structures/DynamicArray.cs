@@ -117,9 +117,20 @@ namespace INS201.Structures
 
         public void Replace(int index, T newValue)
         {
+            if (newValue == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             if (index < 0 || (index > _length && index > Capacity))
             {
                 throw new InvalidOperationException();
+            }
+
+            // If there's no item, i.e: its null, then replace it for something should count as increasing the size of array.
+            if (_items[index] == null)
+            {
+                _length++;
             }
 
             _items[index] = newValue;
