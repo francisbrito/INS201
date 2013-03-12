@@ -43,7 +43,7 @@
     <Compile Include="BaseQueue.cs" />
     <Compile Include="CircularQueue.cs" />
     <Compile Include="Deque.cs" />
-    <Compile Include="Dictonary.cs" />
+    <Compile Include="Dictionary.cs" />
     <Compile Include="DynamicArray.cs" />
     <Compile Include="KeyedNode.cs" />
     <Compile Include="LinkedList.cs" />

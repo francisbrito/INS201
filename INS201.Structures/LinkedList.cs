@@ -147,8 +147,18 @@ namespace INS201.Structures
             // This method should only be called if the node is inside the list.
             // This should be accounted for in the future.
 
+            // If list is empty.
+            if (_length == 0)
+            {
+                throw new InvalidOperationException();
+            }
+            // If its the only element in list.
+            if (_length == 1)
+            {
+                _head = _tail = null;
+            }
             // If its a head, i.e: Has no previous.
-            if (node.Previous == null)
+            else if (node.Previous == null)
             {
                 node.Next.Previous = null;
             }
