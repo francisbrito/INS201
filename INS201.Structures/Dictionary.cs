@@ -12,12 +12,14 @@ namespace INS201.Structures
         public const int GROWTH_CONSTANT = 2;
 
         private int _length;
+        private int _collisions;
 
         private DynamicArray<LinkedList<TValue>> _items;
 
         public Dictionary()
         {
             _length = 0;
+            _collisions = 0;
 
             InitializeItems();
         }
@@ -77,6 +79,11 @@ namespace INS201.Structures
             {
                 _items[hash] = new LinkedList<TValue>();
             }
+            // If the list is created, then this is a collision.
+            else
+            {
+                _collisions++;
+            }
 
             // Hackery~
             // Wraps value into a 'KeyedNode' object, so
@@ -99,6 +106,7 @@ namespace INS201.Structures
             var oldList = _items;
             
             _length = 0; // Reset length.
+            _collisions = 0; // Reset collisions.
 
             _items = new DynamicArray<LinkedList<TValue>>(newCapacity);
 
