@@ -8,7 +8,7 @@ namespace INS201.Structures
     public class Dictionary<TKey, TValue>
     {
         public const int INITIAL_INNER_SIZE = 2;
-        public const float IDEAL_LOAD_FACTOR = 1.0F;
+        public const float IDEAL_LOAD_FACTOR = 5.0F;
         public const int GROWTH_CONSTANT = 2;
 
         private int _length;
@@ -104,7 +104,7 @@ namespace INS201.Structures
         {
             var newCapacity = _items.Capacity * GROWTH_CONSTANT;
             var oldList = _items;
-            
+
             _length = 0; // Reset length.
             _collisions = 0; // Reset collisions.
 
@@ -133,7 +133,7 @@ namespace INS201.Structures
 
         private float GetLoadFactor()
         {
-            return (float) _length / _items.Capacity;
+            return (float)_length / _items.Capacity;
         }
 
         public void Remove(TKey key)
@@ -219,6 +219,37 @@ namespace INS201.Structures
             }
 
             return result;
+        }
+
+        // Breaks Single Responsibility Principle.
+        // But this is not a OOP class, so whatever.
+        public void PrintHistogram()
+        {
+            var frequencyTable = new System.Collections.Generic.Dictionary<int, int>(); // Ha ha ha...
+
+            for (int i = 0; i < _items.Length; i++)
+            {
+                if (_items[i] != null)
+                {
+                    var key = _items[i].Length;
+
+                    try
+                    {
+                        frequencyTable[key]++; // Increase frequency of key.
+                    }
+                    catch (KeyNotFoundException)
+                    {
+
+                        frequencyTable.Add(key, 1);
+                    }
+                }
+            }
+
+            Console.WriteLine("X, Y");
+            foreach (var item in frequencyTable)
+            {
+                Console.WriteLine("{0}, {1}", item.Key, item.Value);
+            }
         }
     }
 }
