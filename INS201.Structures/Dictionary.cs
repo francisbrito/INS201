@@ -11,6 +11,8 @@ namespace INS201.Structures
         public const float IDEAL_LOAD_FACTOR = 5.0F;
         public const int GROWTH_CONSTANT = 2;
 
+        private int[] _listOfPrimes = new int[] { 31, 73, 127, 353, 811, 1523, 3733, 7841, 23117, 42853, 74527, 104729 };
+
         private int _length;
         private int _collisions;
 
@@ -211,6 +213,9 @@ namespace INS201.Structures
                     {
                         result = curr.Value;
                         // TODO: Move element to front.
+
+                        list.SwapHead(curr);
+
                         break;
                     }
 
