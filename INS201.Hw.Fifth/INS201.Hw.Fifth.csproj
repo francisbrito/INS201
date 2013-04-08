@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{60533A40-3513-4BFA-B97D-CEE918656E1A}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{578CC995-E769-447B-9703-158FE1586003}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>INS201.Structures</RootNamespace>
-    <AssemblyName>INS201.Structures</AssemblyName>
+    <RootNamespace>INS201.Hw.Fifth</RootNamespace>
+    <AssemblyName>INS201.Hw.Fifth</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,19 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseQueue.cs" />
-    <Compile Include="BinaryTree.cs" />
-    <Compile Include="CircularQueue.cs" />
-    <Compile Include="Deque.cs" />
-    <Compile Include="Dictionary.cs" />
-    <Compile Include="DynamicArray.cs" />
-    <Compile Include="KeyedNode.cs" />
-    <Compile Include="LinkedList.cs" />
-    <Compile Include="Node.cs" />
-    <Compile Include="TreeNode.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queue.cs" />
-    <Compile Include="Stack.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\INS201.Structures\INS201.Structures.csproj">
+      <Project>{60533a40-3513-4bfa-b97d-cee918656e1a}</Project>
+      <Name>INS201.Structures</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
